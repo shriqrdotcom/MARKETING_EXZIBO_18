@@ -71,7 +71,7 @@ export default function Footer() {
            <p>© 2026 EXZIBO Technologies Inc. All rights reserved.</p>
            <div className="flex space-x-8">
               <a href="#" className="hover:text-primary">English</a>
-              <a href="#" className="hover:text-primary">EUR (€)</a>
+              <a href="#" className="hover:text-primary">INR (₹)</a>
            </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ export default function BottomCTA() {
                </button>
                <button className="w-full sm:w-auto h-16 px-12 bg-primary border-2 border-white/30 text-white font-bold text-lg rounded-xl hover:bg-white/10 transition-colors flex items-center justify-center space-x-3 active:scale-95">
                  <Play size={20} fill="currentColor" />
-                 <span>Watch Teaser</span>
+                 <span>Try Live Platform</span>
                </button>
             </div>
           </div>

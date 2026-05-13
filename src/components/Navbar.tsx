@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'products') => void;
-  currentPage: 'home' | 'products';
+  onNavigate: (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo') => void;
+  currentPage: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo';
 }
 
 export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
@@ -22,17 +22,18 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
   const navLinks = [
     { name: 'Home', id: 'home' },
     { name: 'Products', id: 'products' },
-    { name: 'Features', href: '#features' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Customers', href: '#customers' },
-    { name: 'About', href: '#about' },
-    { name: 'Demo', href: '#demo' },
+    { name: 'Features', id: 'features' },
+    { name: 'Pricing', id: 'pricing' },
+    { name: 'Customers', id: 'customers' },
+    { name: 'About', id: 'about' },
+    { name: 'Demo', id: 'demo' },
     { name: 'Contact', href: '#contact' },
   ];
 
   const handleLinkClick = (link: any) => {
-    if (link.id === 'home' || link.id === 'products') {
-      onNavigate(link.id);
+    const pageIds = ['home', 'products', 'features', 'pricing', 'customers', 'about', 'demo'];
+    if (pageIds.includes(link.id)) {
+      onNavigate(link.id as any);
     }
     setIsMobileMenuOpen(false);
   };
@@ -90,7 +91,10 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
             <button className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors">
               Login
             </button>
-            <button className="btn-primary">
+            <button 
+              onClick={() => onNavigate('demo')}
+              className="btn-primary"
+            >
               Book Demo
             </button>
           </div>
@@ -138,7 +142,13 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
                 <button className="w-full py-3 text-center font-semibold text-text-secondary border border-accent rounded-lg">
                   Login
                 </button>
-                <button className="w-full btn-primary py-3">
+                <button 
+                  onClick={() => {
+                    onNavigate('demo');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full btn-primary py-3"
+                >
                   Book Demo
                 </button>
               </div>

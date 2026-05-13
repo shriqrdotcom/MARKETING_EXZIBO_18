@@ -29,7 +29,7 @@ export default function ProductShowcase() {
                   <div className="grid grid-cols-2 gap-4 mb-8">
                     <div className="h-24 bg-slate-50 border border-accent rounded-xl p-4">
                        <p className="text-xs text-text-secondary mb-1">Total Revenue</p>
-                       <p className="text-2xl font-bold text-primary">$12,450.00</p>
+                       <p className="text-2xl font-bold text-primary">₹1,02,450.00</p>
                     </div>
                     <div className="h-24 bg-slate-50 border border-accent rounded-xl p-4">
                        <p className="text-xs text-text-secondary mb-1">Active Orders</p>

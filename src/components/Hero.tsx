@@ -31,11 +31,11 @@ export default function Hero() {
             
             <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
               <button className="btn-primary w-full sm:w-auto h-14 px-10 text-lg shadow-lg shadow-primary/20">
-                Book Free Demo
+                Explore Platform
               </button>
               <button className="btn-secondary w-full sm:w-auto h-14 px-10 text-lg flex items-center justify-center space-x-2">
                 <Play size={18} fill="currentColor" />
-                <span>View Live Demo</span>
+                <span>View Features</span>
               </button>
             </div>
 

@@ -51,7 +51,7 @@ export default function Comparison() {
                       ))}
                    </div>
                    <div className="mt-8 pt-8 border-t border-accent">
-                      <p className="text-3xl font-display font-bold text-slate-300">$$$</p>
+                      <p className="text-3xl font-display font-bold text-slate-300">₹₹₹</p>
                       <p className="text-xs text-slate-400 mt-1">Fragmented Workflow</p>
                    </div>
                 </div>

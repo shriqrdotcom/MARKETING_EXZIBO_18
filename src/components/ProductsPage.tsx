@@ -87,10 +87,10 @@ export default function ProductsPage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <button className="btn-primary w-full sm:w-auto h-14 px-10 text-lg shadow-lg shadow-primary/20">
-                  Book Demo
+                  Explore Features
                 </button>
                 <button className="btn-secondary w-full sm:w-auto h-14 px-10 text-lg flex items-center justify-center space-x-2">
-                  <span>View Demo</span>
+                  <span>See Product Details</span>
                 </button>
               </div>
             </motion.div>
@@ -201,7 +201,7 @@ export default function ProductsPage() {
                     </li>
                   ))}
                 </ul>
-                <button className="btn-primary">Get Started with {product.title.split(' ')[0]}</button>
+                <button className="btn-primary">See How It Works</button>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -378,8 +378,8 @@ export default function ProductsPage() {
              Join the growing community of smart restaurateurs using EXZIBO. It's time to digitize your growth.
            </p>
            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <button className="btn-primary h-16 px-12 text-lg w-full sm:w-auto">Book My Demo</button>
-              <button className="btn-secondary h-16 px-12 text-lg w-full sm:w-auto">Try Demo Platform</button>
+              <button className="btn-primary h-16 px-12 text-lg w-full sm:w-auto">Explore Platform</button>
+              <button className="btn-secondary h-16 px-12 text-lg w-full sm:w-auto">View Pricing</button>
            </div>
         </div>
       </section>
