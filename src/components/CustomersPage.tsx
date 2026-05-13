@@ -93,7 +93,7 @@ export default function CustomersPage() {
               <Award size={14} className="fill-current" />
               <span>Industry Leader in Guest Experience</span>
             </div>
-            <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
               Trusted by restaurants that are <span className="text-primary italic">growing faster</span>
             </h1>
             <p className="text-lg lg:text-xl text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
@@ -132,7 +132,7 @@ export default function CustomersPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-             <h2 className="text-3xl lg:text-5xl font-display font-bold text-text-heading mb-6 tracking-tight italic">What our partners say</h2>
+             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-text-heading mb-6 tracking-tight italic">What our partners say</h2>
              <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
           </div>
           
@@ -177,7 +177,7 @@ export default function CustomersPage() {
       <section className="py-24 bg-bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-display font-bold text-text-heading mb-6">Proven Success Stories</h2>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-6">Proven Success Stories</h2>
             <p className="text-lg text-text-secondary max-w-xl mx-auto">Deep dives into how we solved real operational challenges for our partners.</p>
           </div>
 
@@ -342,7 +342,7 @@ export default function CustomersPage() {
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] border-4 border-white/20 rounded-full dashed opacity-20" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-           <h2 className="text-5xl lg:text-7xl font-display font-bold mb-8">Join the restaurants growing with <span className="text-primary italic">EXZIBO</span></h2>
+           <h2 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold mb-8">Join the restaurants growing with <span className="text-primary italic">EXZIBO</span></h2>
            <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
              Start your 14-day free trial today. No credit card required. No strings attached.
            </p>

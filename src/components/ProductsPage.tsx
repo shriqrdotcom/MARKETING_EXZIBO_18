@@ -79,7 +79,7 @@ export default function ProductsPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
                 All the tools your restaurant needs — <span className="text-primary italic">in one platform</span>
               </h1>
               <p className="text-lg lg:text-xl text-text-secondary mb-10 max-w-xl leading-relaxed">
@@ -147,7 +147,7 @@ export default function ProductsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-base font-bold text-primary tracking-widest uppercase mb-4">Modular Ecosystem</h2>
-            <p className="text-4xl font-display font-bold text-text-heading">Independent tools. One platform.</p>
+            <p className="text-3xl sm:text-4xl font-display font-bold text-text-heading">Independent tools. One platform.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product) => (
@@ -350,8 +350,8 @@ export default function ProductsPage() {
       {/* Use Cases */}
       <section className="py-24 bg-bg-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-display font-bold text-text-heading mb-16 underline decoration-primary/20 underline-offset-8">Designed for every dining experience</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-16 underline decoration-primary/20 underline-offset-8">Designed for every dining experience</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
              {[
                { type: 'Small Restaurants', benefit: 'Get online fast without high agency costs or technical overhead.' },
                { type: 'Multi-outlet Brands', benefit: 'Consolidate multiple branches into one management dashboard.' },
@@ -373,7 +373,7 @@ export default function ProductsPage() {
              <Zap size={14} className="fill-current" />
              <span>Instant Activation</span>
            </div>
-           <h2 className="text-5xl lg:text-6xl font-display font-bold text-text-heading mb-8">Start managing your restaurant smarter</h2>
+           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-text-heading mb-8">Start managing your restaurant smarter</h2>
            <p className="text-xl text-text-secondary mb-12 max-w-2xl mx-auto">
              Join the growing community of smart restaurateurs using EXZIBO. It's time to digitize your growth.
            </p>

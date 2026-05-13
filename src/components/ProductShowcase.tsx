@@ -6,7 +6,7 @@ export default function ProductShowcase() {
     <section className="py-24 bg-bg-soft" id="products">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl font-display font-bold text-text-heading mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-6 tracking-tight">
             See the platform in action
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">

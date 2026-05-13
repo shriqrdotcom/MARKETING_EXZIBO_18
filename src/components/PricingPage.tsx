@@ -83,7 +83,7 @@ export default function PricingPage() {
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl lg:text-7xl font-display font-bold text-text-heading mb-6 tracking-tight"
+            className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading mb-6 tracking-tight"
           >
             Simple, transparent <span className="text-primary italic">pricing</span> for every restaurant
           </motion.h1>
@@ -278,7 +278,7 @@ export default function PricingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
            <Zap size={48} className="text-primary mx-auto mb-8 animate-pulse" />
-           <h2 className="text-5xl lg:text-7xl font-display font-bold text-text-heading mb-8">Start growing your restaurant today</h2>
+           <h2 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading mb-8">Start growing your restaurant today</h2>
            <p className="text-xl text-text-secondary mb-12 max-w-2xl mx-auto">
              Join hundreds of restaurateurs who fixed their operations with EXZIBO. Your digital growth starts here.
            </p>

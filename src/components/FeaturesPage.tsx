@@ -159,7 +159,7 @@ export default function FeaturesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading leading-[1.1] mb-6">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading leading-[1.1] mb-6">
                 Powerful features to <span className="text-primary italic">run and grow</span> your restaurant
               </h1>
               <p className="text-lg lg:text-xl text-text-secondary mb-10 max-w-xl leading-relaxed">
@@ -322,12 +322,12 @@ export default function FeaturesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-base font-bold text-primary tracking-widest uppercase mb-4">The Workflow</h2>
-            <p className="text-4xl font-display font-bold mb-6">How EXZIBO transforms your operations</p>
+            <p className="text-3xl sm:text-4xl font-display font-bold mb-6">How EXZIBO transforms your operations</p>
           </div>
           
           <div className="relative">
             <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-slate-800 -translate-y-1/2 hidden lg:block" />
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
               {[
                 { icon: Smartphone, label: '1. Build Menu', detail: 'Online Presence' },
                 { icon: ShoppingCart, label: '2. Take Orders', detail: 'Fast Operations' },
@@ -398,7 +398,7 @@ export default function FeaturesPage() {
       {/* FAQ Section */}
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-           <h2 className="text-4xl font-display font-bold text-text-heading text-center mb-16 underline decoration-accent underline-offset-[12px]">Feature Deep Dive</h2>
+           <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading text-center mb-16 underline decoration-accent underline-offset-[12px]">Feature Deep Dive</h2>
            <div className="space-y-6">
               {[
                 { q: 'What features are included in the base plan?', a: 'The base plan includes our high-converting Menu Website Builder and the central Order Management System. This is everything you need to start taking orders today.' },
@@ -421,7 +421,7 @@ export default function FeaturesPage() {
            <div className="absolute top-0 right-0 w-1/2 h-full border-l-2 border-white/20 skew-x-12 translate-x-1/2" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-           <h2 className="text-5xl lg:text-6xl font-display font-bold mb-8">Ready to modernize your restaurant?</h2>
+           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold mb-8">Ready to modernize your restaurant?</h2>
            <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12">
              Start your journey with EXZIBO today and see how easy managing growth can be.
            </p>

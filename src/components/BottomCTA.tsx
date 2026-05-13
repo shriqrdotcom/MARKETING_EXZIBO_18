@@ -18,7 +18,7 @@ export default function BottomCTA() {
           </div>
 
           <div className="relative z-10">
-            <h2 className="text-4xl lg:text-6xl font-display font-bold mb-8 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-display font-bold mb-8 tracking-tight">
               Ready to see EXZIBO in action?
             </h2>
             <p className="text-xl text-white/80 max-w-2xl mx-auto mb-12 mb-12">

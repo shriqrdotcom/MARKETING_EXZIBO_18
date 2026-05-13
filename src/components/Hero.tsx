@@ -14,22 +14,23 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="text-center lg:text-left relative z-10"
           >
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-sm font-medium mb-6">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-sm font-medium mb-8">
               <span className="flex h-2 w-2 rounded-full bg-primary" />
               <span>Version 2.0 is now live</span>
               <ChevronRight size={14} />
             </div>
             
-            <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading leading-[1.1] mb-6">
+            <h1 className="text-3xl sm:text-6xl lg:text-7xl font-display font-bold text-text-heading leading-[1.1] mb-6">
               All-in-one platform to grow your <span className="text-primary italic">restaurant</span> online
             </h1>
             
-            <p className="text-lg lg:text-xl text-text-secondary mb-10 max-w-xl leading-relaxed">
+            <p className="text-lg lg:text-xl text-text-secondary mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Create your menu website, manage orders, track performance, and grow your restaurant — all from one dashboard.
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
               <button className="btn-primary w-full sm:w-auto h-14 px-10 text-lg shadow-lg shadow-primary/20">
                 Explore Platform
               </button>

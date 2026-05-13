@@ -13,7 +13,12 @@
 }
 
 @layer base {
-  body {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    overflow-x: hidden;
     @apply font-sans antialiased text-text-heading bg-white;
   }
   

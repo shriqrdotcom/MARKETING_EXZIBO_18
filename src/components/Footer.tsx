@@ -9,10 +9,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-bg-soft pt-24 pb-12 border-t border-accent">
+    <footer className="bg-bg-soft pt-16 pb-12 border-t border-accent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 mb-20">
-          <div className="col-span-2 space-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 mb-16 lg:mb-20">
+          <div className="col-span-1 sm:col-span-2 space-y-8">
             <a href="#" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">E</span>

@@ -32,7 +32,7 @@ export default function DemoPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-8">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-8">
                 See how EXZIBO can <span className="text-primary italic">grow</span> your restaurant
               </h1>
               <p className="text-xl text-text-secondary mb-12 leading-relaxed">
@@ -277,7 +277,7 @@ export default function DemoPage() {
          </div>
          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <Award size={48} className="text-primary mx-auto mb-8 animate-bounce" />
-            <h2 className="text-4xl lg:text-5xl font-display font-bold text-white mb-8">Ready to transform your guest experience?</h2>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-white mb-8">Ready to transform your guest experience?</h2>
             <p className="text-slate-400 mb-12 text-lg">Join 500+ restaurants that are scaling with EXZIBO’s unified platform.</p>
             <button className="h-16 px-12 bg-primary text-white font-bold text-lg rounded-2xl hover:brightness-110 active:scale-95 transition-all shadow-2xl shadow-primary/20">
                Book My Free Demo Now

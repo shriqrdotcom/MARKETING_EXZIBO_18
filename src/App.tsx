@@ -90,37 +90,6 @@ export default function App() {
       </main>
 
       <Footer />
-
-      {/* Mobile Sticky CTA */}
-      <AnimatePresence>
-        {showStickyCTA && (
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-32px)]"
-          >
-            <button 
-              onClick={() => {
-                if (currentPage === 'demo') {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                  navigateTo('demo');
-                }
-              }}
-              className="w-full h-14 bg-primary text-white font-bold text-lg rounded-2xl shadow-2xl shadow-primary/40 flex items-center justify-center space-x-2 active:scale-95 transition-transform"
-            >
-              <span>
-                {currentPage === 'pricing' ? 'Start Free Trial' : 
-                 currentPage === 'features' ? 'See How It Works' :
-                 currentPage === 'customers' ? 'See Results' :
-                 'Book Free Demo'}
-              </span>
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

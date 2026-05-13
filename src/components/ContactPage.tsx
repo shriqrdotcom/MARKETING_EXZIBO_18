@@ -41,7 +41,7 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
               Get in touch with <span className="text-primary italic">EXZIBO</span>
             </h1>
             <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
@@ -64,7 +64,7 @@ export default function ContactPage() {
               className="space-y-12"
             >
               <div>
-                <h2 className="text-3xl font-display font-bold text-text-heading mb-8">How would you like to connect?</h2>
+                <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-heading mb-8">How would you like to connect?</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Direct Contact Cards */}
                   <a href="mailto:support@exzibo.com" className="group p-6 bg-white rounded-3xl border border-accent hover:border-primary transition-all shadow-sm">
@@ -223,7 +223,7 @@ export default function ContactPage() {
       {/* Quick Help Section */}
       <section className="py-24 bg-bg-soft border-y border-accent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-display font-bold text-text-heading mb-16">Quick Help Resources</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-heading mb-16">Quick Help Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: HelpCircle, title: 'FAQ', desc: 'Find answers to common questions immediately.', link: 'See FAQs' },
@@ -268,7 +268,7 @@ export default function ContactPage() {
       {/* Final CTA */}
       <section className="py-24 bg-primary text-white text-center">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-           <h2 className="text-4xl lg:text-5xl font-display font-bold mb-8">Need help getting started?</h2>
+           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-8">Need help getting started?</h2>
            <p className="text-white/70 mb-12 text-lg">Our experts are standing by to help you choose the right plan for your growth.</p>
            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <button className="h-16 px-12 bg-white text-primary font-bold text-lg rounded-2xl hover:brightness-110 active:scale-95 transition-all shadow-2xl shadow-primary/20">

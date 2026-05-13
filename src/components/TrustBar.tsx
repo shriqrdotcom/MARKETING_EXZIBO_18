@@ -12,13 +12,13 @@ export default function TrustBar() {
           Trusted by 50+ leading restaurants worldwide
         </p>
         
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
            {logos.map((logo) => (
              <div key={logo} className="flex items-center space-x-2">
-               <div className="w-8 h-8 rounded bg-slate-200 flex items-center justify-center font-bold text-slate-400">
+               <div className="w-6 h-6 sm:w-8 sm:h-8 rounded bg-slate-200 flex items-center justify-center font-bold text-slate-400 text-xs sm:text-base">
                  {logo[0]}
                </div>
-               <span className="text-xl font-display font-bold text-slate-600">{logo}</span>
+               <span className="text-lg sm:text-xl font-display font-bold text-slate-600">{logo}</span>
              </div>
            ))}
         </div>

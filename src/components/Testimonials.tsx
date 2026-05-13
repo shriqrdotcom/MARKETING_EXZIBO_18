@@ -29,7 +29,7 @@ export default function Testimonials() {
     <section className="py-24 bg-bg-soft" id="customers">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-4xl font-display font-bold text-text-heading mb-6 tracking-tight italic">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-6 tracking-tight italic">
             What our partners are saying
           </h2>
         </div>

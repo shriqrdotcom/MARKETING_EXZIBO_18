@@ -14,7 +14,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-5xl lg:text-7xl font-display font-bold text-text-heading mb-8">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading mb-8">
               We're on a mission to empower every <span className="text-primary italic">restaurateur</span>
             </h1>
             <p className="text-xl text-text-secondary mb-12 max-w-2xl mx-auto">
@@ -32,7 +32,7 @@ export default function AboutPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-             <h2 className="text-4xl font-display font-bold text-text-heading mb-4">Our Core Values</h2>
+             <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-4">Our Core Values</h2>
              <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -73,7 +73,7 @@ export default function AboutPage() {
                   </div>
                </div>
                <div>
-                  <h2 className="text-4xl font-display font-bold text-text-heading mb-8">From a small idea to a global platform</h2>
+                  <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-8">From a small idea to a global platform</h2>
                   <p className="text-lg text-text-secondary mb-8 leading-relaxed">
                      Started by a group of hospitality enthusiasts and software engineers, EXZIBO was born in a small cloud kitchen. We saw firsthand how hard it was to manage orders, menus, and customers across different platforms.
                   </p>
@@ -130,7 +130,7 @@ export default function AboutPage() {
         <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/40 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
            <Globe size={48} className="text-primary mx-auto mb-8 animate-[spin_20s_linear_infinite]" />
-           <h2 className="text-5xl lg:text-7xl font-display font-bold mb-8">Serving restaurants <span className="text-primary italic">globally</span></h2>
+           <h2 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold mb-8">Serving restaurants <span className="text-primary italic">globally</span></h2>
            <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
              With presence in 12 countries and support for multiple currencies, we're building the future of digital hospitality.
            </p>

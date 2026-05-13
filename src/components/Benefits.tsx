@@ -40,7 +40,7 @@ export default function Benefits() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-base font-bold text-primary tracking-wide uppercase mb-4">Why EXZIBO?</h2>
-          <p className="text-4xl sm:text-5xl font-display font-bold text-text-heading mb-6 tracking-tight">
+          <p className="text-3xl sm:text-5xl font-display font-bold text-text-heading mb-6 tracking-tight">
             Stop juggling tools, start growing your restaurant.
           </p>
           <p className="text-lg text-text-secondary leading-relaxed">

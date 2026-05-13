@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, Home, LayoutGrid, PlayCircle, Tag, Mail } from 'lucide-react';
 
 interface NavbarProps {
   onNavigate: (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo' | 'contact') => void;
@@ -41,32 +41,31 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-accent py-3' : 'bg-transparent py-5'
+        isScrolled || isMobileMenuOpen ? 'bg-white/95 backdrop-blur-md border-b border-accent py-4' : 'bg-transparent py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center">
-            <a 
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate('home');
-              }}
-              className="flex items-center space-x-2 cursor-pointer"
-            >
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">E</span>
-              </div>
-              <span className="text-2xl font-display font-bold text-text-heading tracking-tight">
-                EXZIBO
-              </span>
-            </a>
-          </div>
+          <a 
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate('home');
+              setIsMobileMenuOpen(false);
+            }}
+            className="flex items-center space-x-2 cursor-pointer z-50"
+          >
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xl">E</span>
+            </div>
+            <span className="text-2xl font-display font-bold text-text-heading tracking-tight">
+              EXZIBO
+            </span>
+          </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -75,9 +74,9 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
                   e.preventDefault();
                   handleLinkClick(link);
                 }}
-                className={`text-sm font-medium transition-colors cursor-pointer ${
+                className={`text-sm font-semibold tracking-wide transition-colors cursor-pointer ${
                   (link.id === currentPage) 
-                    ? 'text-primary' 
+                    ? 'text-primary underline decoration-2 underline-offset-8' 
                     : 'text-text-secondary hover:text-primary'
                 }`}
               >
@@ -86,50 +85,72 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
             ))}
           </div>
 
-          {/* Right side buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Right Side */}
+          <div className="hidden lg:flex items-center space-x-6">
+            <button 
+              onClick={() => onNavigate('demo')}
+              className="text-sm font-bold text-text-heading hover:text-primary transition-colors"
+            >
+              Login
+            </button>
+            <button 
+              onClick={() => onNavigate('demo')}
+              className="btn-primary px-6 py-2.5 rounded-xl transition-all"
+            >
+              Book Demo
+            </button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile Menu Toggle */}
+          <div className="lg:hidden flex items-center">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-text-heading p-2"
+              className="text-text-heading p-2 z-50"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu (Standard Responsive Dropdown) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-accent overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-accent shadow-2xl overflow-hidden py-10 px-6"
           >
-            <div className="px-4 pt-2 pb-6 space-y-2">
+            <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href || '#'}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLinkClick(link);
-                  }}
-                  className={`block w-full text-left px-3 py-4 text-base font-medium transition-colors rounded-lg cursor-pointer ${
+                  onClick={() => handleLinkClick(link)}
+                  className={`flex items-center justify-between w-full p-4 rounded-xl text-left transition-all ${
                     link.id === currentPage 
-                      ? 'text-primary bg-primary/5' 
-                      : 'text-text-secondary hover:text-primary hover:bg-slate-50'
+                      ? 'text-primary bg-primary/5 font-bold' 
+                      : 'text-text-heading hover:bg-slate-50 font-semibold'
                   }`}
                 >
-                  {link.name}
-                </a>
+                  <span className="text-lg">{link.name}</span>
+                  <ChevronRight size={18} className="opacity-20" />
+                </button>
               ))}
-              <div className="pt-4 flex flex-col space-y-3">
+              
+              <div className="pt-8 flex flex-col space-y-4">
+                <button 
+                  onClick={() => { onNavigate('demo'); setIsMobileMenuOpen(false); }}
+                  className="w-full h-14 bg-primary text-white font-bold rounded-2xl shadow-lg active:scale-95 transition-transform"
+                >
+                  Get Started for Free
+                </button>
+                <button 
+                  onClick={() => { onNavigate('demo'); setIsMobileMenuOpen(false); }}
+                  className="w-full h-14 bg-slate-100 text-text-heading font-bold rounded-2xl active:scale-95 transition-transform"
+                >
+                  Sign In
+                </button>
               </div>
             </div>
           </motion.div>

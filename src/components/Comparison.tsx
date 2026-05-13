@@ -15,7 +15,7 @@ export default function Comparison() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-4xl font-display font-bold text-text-heading mb-8">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-heading mb-8">
               Everything you need in one platform
             </h2>
             <p className="text-lg text-text-secondary mb-12 leading-relaxed">
