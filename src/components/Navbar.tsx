@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight } from 'lucide-react';
 
 interface NavbarProps {
-  onNavigate: (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo') => void;
-  currentPage: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo';
+  onNavigate: (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo' | 'contact') => void;
+  currentPage: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo' | 'contact';
 }
 
 export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
@@ -27,11 +27,11 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
     { name: 'Customers', id: 'customers' },
     { name: 'About', id: 'about' },
     { name: 'Demo', id: 'demo' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Contact', id: 'contact' },
   ];
 
   const handleLinkClick = (link: any) => {
-    const pageIds = ['home', 'products', 'features', 'pricing', 'customers', 'about', 'demo'];
+    const pageIds = ['home', 'products', 'features', 'pricing', 'customers', 'about', 'demo', 'contact'];
     if (pageIds.includes(link.id)) {
       onNavigate(link.id as any);
     }
@@ -88,15 +88,6 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
 
           {/* Right side buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors">
-              Login
-            </button>
-            <button 
-              onClick={() => onNavigate('demo')}
-              className="btn-primary"
-            >
-              Book Demo
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -139,18 +130,6 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
                 </a>
               ))}
               <div className="pt-4 flex flex-col space-y-3">
-                <button className="w-full py-3 text-center font-semibold text-text-secondary border border-accent rounded-lg">
-                  Login
-                </button>
-                <button 
-                  onClick={() => {
-                    onNavigate('demo');
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="w-full btn-primary py-3"
-                >
-                  Book Demo
-                </button>
               </div>
             </div>
           </motion.div>

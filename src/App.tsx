@@ -23,9 +23,10 @@ import PricingPage from './components/PricingPage';
 import CustomersPage from './components/CustomersPage';
 import AboutPage from './components/AboutPage';
 import DemoPage from './components/DemoPage';
+import ContactPage from './components/ContactPage';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo' | 'contact'>('home');
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function App() {
   }, []);
 
   // Update navbar logic in child components or pass this as prop
-  const navigateTo = (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo') => {
+  const navigateTo = (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo' | 'contact') => {
     setCurrentPage(page);
     window.scrollTo(0, 0);
   };
@@ -73,6 +74,8 @@ export default function App() {
         return <AboutPage />;
       case 'demo':
         return <DemoPage />;
+      case 'contact':
+        return <ContactPage />;
       default:
         return null;
     }
