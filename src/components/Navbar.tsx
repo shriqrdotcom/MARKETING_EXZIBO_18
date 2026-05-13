@@ -2,7 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight } from 'lucide-react';
 
-export default function Navbar() {
+interface NavbarProps {
+  onNavigate: (page: 'home' | 'products') => void;
+  currentPage: 'home' | 'products';
+}
+
+export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -15,8 +20,8 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Products', href: '#products' },
+    { name: 'Home', id: 'home' },
+    { name: 'Products', id: 'products' },
     { name: 'Features', href: '#features' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Customers', href: '#customers' },
@@ -24,6 +29,13 @@ export default function Navbar() {
     { name: 'Demo', href: '#demo' },
     { name: 'Contact', href: '#contact' },
   ];
+
+  const handleLinkClick = (link: any) => {
+    if (link.id === 'home' || link.id === 'products') {
+      onNavigate(link.id);
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav 
@@ -35,7 +47,14 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="#" className="flex items-center space-x-2">
+            <a 
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('home');
+              }}
+              className="flex items-center space-x-2 cursor-pointer"
+            >
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-xl">E</span>
               </div>
@@ -48,7 +67,19 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="nav-link">
+              <a
+                key={link.name}
+                href={link.href || '#'}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick(link);
+                }}
+                className={`text-sm font-medium transition-colors cursor-pointer ${
+                  (link.id === currentPage) 
+                    ? 'text-primary' 
+                    : 'text-text-secondary hover:text-primary'
+                }`}
+              >
                 {link.name}
               </a>
             ))}
@@ -89,9 +120,16 @@ export default function Navbar() {
               {navLinks.map((link) => (
                 <a
                   key={link.name}
-                  href={link.href}
-                  className="block px-3 py-4 text-base font-medium text-text-secondary hover:text-primary hover:bg-slate-50 rounded-lg transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  href={link.href || '#'}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLinkClick(link);
+                  }}
+                  className={`block w-full text-left px-3 py-4 text-base font-medium transition-colors rounded-lg cursor-pointer ${
+                    link.id === currentPage 
+                      ? 'text-primary bg-primary/5' 
+                      : 'text-text-secondary hover:text-primary hover:bg-slate-50'
+                  }`}
                 >
                   {link.name}
                 </a>

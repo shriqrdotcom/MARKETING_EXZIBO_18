@@ -17,8 +17,10 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import BottomCTA from './components/BottomCTA';
 import Footer from './components/Footer';
+import ProductsPage from './components/ProductsPage';
 
 export default function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'products'>('home');
   const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
@@ -31,21 +33,33 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Update navbar logic in child components or pass this as prop
+  const navigateTo = (page: 'home' | 'products') => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <div className="min-h-screen selection:bg-primary selection:text-white">
-      <Navbar />
+    <div className="min-h-screen selection:bg-primary selection:text-white leading-normal">
+      <Navbar onNavigate={navigateTo} currentPage={currentPage} />
       
       <main>
-        <Hero />
-        <TrustBar />
-        <Benefits />
-        <ProductShowcase />
-        <Features />
-        <HowItWorks />
-        <Comparison />
-        <Testimonials />
-        <FAQ />
-        <BottomCTA />
+        {currentPage === 'home' ? (
+          <>
+            <Hero />
+            <TrustBar />
+            <Benefits />
+            <ProductShowcase />
+            <Features />
+            <HowItWorks />
+            <Comparison />
+            <Testimonials />
+            <FAQ />
+            <BottomCTA />
+          </>
+        ) : (
+          <ProductsPage />
+        )}
       </main>
 
       <Footer />
