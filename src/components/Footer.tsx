@@ -1,6 +1,10 @@
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 export default function Footer() {
+  const { data } = useCMS();
+  const footer = data.footer;
+
   const links = [
     { title: 'Product', items: ['Menu Builder', 'Order Manager', 'Analytics', 'Bookings'] },
     { title: 'Company', items: ['About Us', 'Careers', 'Press', 'Contact'] },
@@ -18,18 +22,18 @@ export default function Footer() {
                 <span className="text-white font-bold text-xl">E</span>
               </div>
               <span className="text-2xl font-display font-bold text-text-heading tracking-tight">
-                EXZIBO
+                {data.general.siteName}
               </span>
             </a>
             <p className="text-text-secondary max-w-xs leading-relaxed">
-              The all-in-one growth platform for modern restaurants. Scale your operations and delight your customers with EXZIBO.
+              {footer.tagline}
             </p>
             <div className="flex space-x-4">
-               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                 <a key={i} href="#" className="w-10 h-10 rounded-full border border-accent flex items-center justify-center text-text-secondary hover:text-primary hover:border-primary transition-all">
-                   <Icon size={18} />
-                 </a>
-               ))}
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                <a key={i} href="#" className="w-10 h-10 rounded-full border border-accent flex items-center justify-center text-text-secondary hover:text-primary hover:border-primary transition-all">
+                  <Icon size={18} />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -49,30 +53,30 @@ export default function Footer() {
           ))}
 
           <div className="col-span-2 lg:col-span-1 space-y-6">
-             <h4 className="font-bold text-text-heading">Contact Us</h4>
-             <ul className="space-y-4">
-                <li className="flex items-center space-x-3 text-sm text-text-secondary">
-                   <Mail size={16} className="text-primary" />
-                   <span>hello@exzibo.com</span>
-                </li>
-                <li className="flex items-center space-x-3 text-sm text-text-secondary">
-                   <Phone size={16} className="text-primary" />
-                   <span>+1 (555) 000-0000</span>
-                </li>
-                <li className="flex items-center space-x-3 text-sm text-text-secondary">
-                   <MapPin size={16} className="text-primary" />
-                   <span>San Francisco, CA</span>
-                </li>
-             </ul>
+            <h4 className="font-bold text-text-heading">Contact Us</h4>
+            <ul className="space-y-4">
+              <li className="flex items-center space-x-3 text-sm text-text-secondary">
+                <Mail size={16} className="text-primary" />
+                <span>{footer.email}</span>
+              </li>
+              <li className="flex items-center space-x-3 text-sm text-text-secondary">
+                <Phone size={16} className="text-primary" />
+                <span>{footer.phone}</span>
+              </li>
+              <li className="flex items-center space-x-3 text-sm text-text-secondary">
+                <MapPin size={16} className="text-primary" />
+                <span>{footer.location}</span>
+              </li>
+            </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-accent flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-text-secondary">
-           <p>© 2026 EXZIBO Technologies Inc. All rights reserved.</p>
-           <div className="flex space-x-8">
-              <a href="#" className="hover:text-primary">English</a>
-              <a href="#" className="hover:text-primary">INR (₹)</a>
-           </div>
+          <p>© 2026 {data.general.siteName} Technologies Inc. All rights reserved.</p>
+          <div className="flex space-x-8">
+            <a href="#" className="hover:text-primary">English</a>
+            <a href="#" className="hover:text-primary">INR (₹)</a>
+          </div>
         </div>
       </div>
     </footer>

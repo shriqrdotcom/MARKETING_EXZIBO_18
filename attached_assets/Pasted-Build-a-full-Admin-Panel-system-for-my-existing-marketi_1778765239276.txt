@@ -1,0 +1,184 @@
+Build a full Admin Panel system for my existing marketing website project.
+
+1. Entry Screen (Project Start)
+
+When the app loads (root route "/"), show a clean minimal selection screen with 2 buttons:
+
+- "ADMIN"
+- "MARKETING WEBSITE"
+
+Design:
+
+- Centered layout (full screen)
+- Black & white theme
+- Modern UI (rounded buttons, subtle shadow)
+- Clicking:
+  - "ADMIN" → go to "/admin"
+  - "MARKETING WEBSITE" → go to "/home" (main site)
+
+---
+
+2. Routing Structure (IMPORTANT - DO NOT BREAK EXISTING SITE)
+
+- "/" → Selection screen
+- "/home" → Marketing website (existing site)
+- "/admin" → Admin dashboard
+
+Make sure:
+
+- No 404 errors on refresh
+- Use proper SPA routing (React Router or equivalent)
+- Add fallback route handling
+
+---
+
+3. Admin Panel Core Goal
+
+The admin panel should allow editing of ALL website content dynamically:
+
+Editable items:
+
+- All text (headings, paragraphs, buttons)
+- All images (upload + replace)
+- Pricing plans
+- Features
+- Testimonials
+- Contact info
+- Hero section content
+
+---
+
+4. Admin Panel UI Layout
+
+Create a dashboard layout:
+
+Left Sidebar:
+
+- Dashboard
+- Home Section
+- Products
+- Features
+- Pricing
+- Customers
+- About
+- Demo
+- Contact
+
+Main Panel:
+
+- Editable forms for each section
+
+Top Bar:
+
+- Save Changes button
+- Preview Website button
+
+---
+
+5. Editing System (VERY IMPORTANT)
+
+Each section should have:
+
+- Input fields for text
+- Image upload (with preview)
+- Add / Remove items (for lists like features, pricing)
+
+Example:
+Hero Section:
+
+- Title input
+- Subtitle input
+- Button text input
+- Image upload
+
+Pricing:
+
+- Plan name
+- Price
+- Features list (dynamic add/remove)
+
+---
+
+6. Data Storage (IMPORTANT DECISION)
+
+Use a persistent database (recommended: Supabase or JSON storage).
+
+Structure:
+
+- Store all website content in a single structured object (CMS style)
+
+Example:
+{
+"home": { "title": "...", "image": "..." },
+"pricing": [...],
+"features": [...]
+}
+
+---
+
+7. Live Sync With Website
+
+VERY IMPORTANT:
+
+- The marketing website ("/home") should dynamically read data from the same storage
+- When admin updates content → website updates instantly (or after refresh)
+
+---
+
+8. Image Upload Handling
+
+- Allow image upload
+- Store image URL (Supabase Storage or local storage)
+- Show preview before saving
+
+---
+
+9. Preview Mode
+
+Add a "Preview Website" button in admin:
+
+- Opens "/home" in new tab
+- Shows latest saved changes
+
+---
+
+10. Authentication (Basic)
+
+Protect admin route:
+
+- Simple login page before "/admin"
+- Hardcoded credentials (for now)
+  - username: admin
+  - password: admin123
+
+---
+
+11. Error Handling
+
+- Prevent crashes
+- Show loading states
+- Show success message after saving
+
+---
+
+12. Design Requirements
+
+- Black & white minimal theme (same as marketing site)
+- Clean spacing
+- Mobile + desktop responsive
+
+---
+
+13. Performance Rules
+
+- Do NOT break existing marketing pages
+- Do NOT remove current UI
+- Only connect it with dynamic data
+
+---
+
+FINAL GOAL
+
+I want a fully functional CMS-style admin panel where I can control my entire marketing website content (text + images) without touching code.
+
+Make it clean, scalable, and production-ready.
