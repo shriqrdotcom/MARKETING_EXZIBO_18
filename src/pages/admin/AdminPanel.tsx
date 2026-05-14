@@ -51,9 +51,8 @@ export default function AdminPanel() {
 
   const handleSave = async () => {
     setSaveStatus('saving');
-    await new Promise(r => setTimeout(r, 500));
     try {
-      saveData(localData);
+      await saveData(localData);
       setSaveStatus('saved');
       setTimeout(() => setSaveStatus('idle'), 3000);
     } catch {
@@ -252,8 +251,8 @@ function Dashboard({ data, onNavigate }: { data: any; onNavigate: (s: Section) =
       <div className="bg-slate-900 text-white rounded-2xl p-6">
         <p className="font-bold mb-1">How it works</p>
         <p className="text-sm text-slate-400 leading-relaxed">
-          Edit any section using the sidebar, then click <strong className="text-white">Save</strong> in the top bar. 
-          Click <strong className="text-white">Preview Site</strong> to see your changes live at <code className="text-slate-300">/home</code>.
+          Edit any section using the sidebar, then click <strong className="text-white">Save</strong> in the top bar. Changes are saved to Supabase and reflected instantly on the live site.
+          Click <strong className="text-white">Preview Site</strong> to see your changes at <code className="text-slate-300">/home</code>.
         </p>
       </div>
     </div>

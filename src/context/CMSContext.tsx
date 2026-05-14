@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { fetchContent } from '../lib/contentApi';
+import { fetchContent, upsertContent } from '../lib/contentApi';
 
 export interface Testimonial {
   name: string;
@@ -175,7 +175,7 @@ interface CMSContextType {
   data: CMSData;
   loading: boolean;
   updateData: (newData: CMSData) => void;
-  saveData: (newData: CMSData) => void;
+  saveData: (newData: CMSData) => Promise<void>;
   resetData: () => void;
   isDirty: boolean;
 }
@@ -210,7 +210,8 @@ export function CMSProvider({ children }: { children: ReactNode }) {
     setIsDirty(true);
   };
 
-  const saveData = (newData: CMSData) => {
+  const saveData = async (newData: CMSData): Promise<void> => {
+    await upsertContent(newData);
     setData(newData);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
     setIsDirty(false);

@@ -76,6 +76,51 @@ export async function fetchContent(): Promise<CMSData> {
   };
 }
 
+export async function upsertContent(cms: CMSData): Promise<void> {
+  if (!supabase) {
+    console.warn('Supabase not configured — changes saved locally only.');
+    return;
+  }
+
+  const rows: { section: string; key: string; value: string }[] = [
+    { section: 'hero', key: 'badge',               value: cms.hero.badge },
+    { section: 'hero', key: 'title',               value: cms.hero.title },
+    { section: 'hero', key: 'titleHighlight',      value: cms.hero.titleHighlight },
+    { section: 'hero', key: 'subtitle',            value: cms.hero.subtitle },
+    { section: 'hero', key: 'primaryButtonText',   value: cms.hero.primaryButtonText },
+    { section: 'hero', key: 'secondaryButtonText', value: cms.hero.secondaryButtonText },
+    { section: 'hero', key: 'trustItem1',          value: cms.hero.trustItem1 },
+    { section: 'hero', key: 'trustItem2',          value: cms.hero.trustItem2 },
+
+    { section: 'contact', key: 'email',    value: cms.contact.email },
+    { section: 'contact', key: 'phone',    value: cms.contact.phone },
+    { section: 'contact', key: 'location', value: cms.contact.location },
+    { section: 'contact', key: 'hours',    value: cms.contact.hours },
+
+    { section: 'footer', key: 'tagline',  value: cms.footer.tagline },
+    { section: 'footer', key: 'email',    value: cms.footer.email },
+    { section: 'footer', key: 'phone',    value: cms.footer.phone },
+    { section: 'footer', key: 'location', value: cms.footer.location },
+
+    { section: 'general', key: 'siteName',    value: cms.general.siteName },
+    { section: 'general', key: 'siteTagline', value: cms.general.siteTagline },
+    { section: 'general', key: 'heroImage',   value: cms.general.heroImage },
+
+    { section: 'features',     key: 'list', value: JSON.stringify(cms.features) },
+    { section: 'testimonials', key: 'list', value: JSON.stringify(cms.testimonials) },
+    { section: 'pricing',      key: 'list', value: JSON.stringify(cms.pricing) },
+  ];
+
+  const { error } = await supabase
+    .from('content')
+    .upsert(rows, { onConflict: 'section,key' });
+
+  if (error) {
+    console.error('Supabase upsertContent error:', error.message);
+    throw new Error(error.message);
+  }
+}
+
 export async function fetchMediaUrl(bucket: string, path: string): Promise<string | null> {
   if (!supabase) return null;
   const { data } = supabase.storage.from(bucket).getPublicUrl(path);
