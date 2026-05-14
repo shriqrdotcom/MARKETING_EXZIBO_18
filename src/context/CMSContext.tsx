@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { fetchContent } from '../lib/contentApi';
 
 export interface Testimonial {
   name: string;
@@ -56,7 +57,7 @@ export interface CMSData {
   };
 }
 
-const DEFAULT_DATA: CMSData = {
+export const DEFAULT_DATA: CMSData = {
   hero: {
     badge: 'Version 2.0 is now live',
     title: 'All-in-one platform to grow your',
@@ -159,7 +160,7 @@ const DEFAULT_DATA: CMSData = {
 
 const STORAGE_KEY = 'exzibo_cms_data';
 
-function loadData(): CMSData {
+function loadLocalData(): CMSData {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
@@ -172,6 +173,7 @@ function loadData(): CMSData {
 
 interface CMSContextType {
   data: CMSData;
+  loading: boolean;
   updateData: (newData: CMSData) => void;
   saveData: (newData: CMSData) => void;
   resetData: () => void;
@@ -181,8 +183,27 @@ interface CMSContextType {
 const CMSContext = createContext<CMSContextType | null>(null);
 
 export function CMSProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<CMSData>(loadData);
+  const [data, setData] = useState<CMSData>(loadLocalData);
+  const [loading, setLoading] = useState(true);
   const [isDirty, setIsDirty] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchContent()
+      .then((remoteData) => {
+        if (!cancelled) {
+          setData(remoteData);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to load content from Supabase, using fallback:', err);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   const updateData = (newData: CMSData) => {
     setData(newData);
@@ -202,7 +223,7 @@ export function CMSProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <CMSContext.Provider value={{ data, updateData, saveData, resetData, isDirty }}>
+    <CMSContext.Provider value={{ data, loading, updateData, saveData, resetData, isDirty }}>
       {children}
     </CMSContext.Provider>
   );
@@ -213,5 +234,3 @@ export function useCMS() {
   if (!ctx) throw new Error('useCMS must be used within CMSProvider');
   return ctx;
 }
-
-export { DEFAULT_DATA };
