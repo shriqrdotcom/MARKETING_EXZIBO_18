@@ -87,18 +87,6 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
 
           {/* Desktop Right Side */}
           <div className="hidden lg:flex items-center space-x-6">
-            <button 
-              onClick={() => onNavigate('demo')}
-              className="text-sm font-bold text-text-heading hover:text-primary transition-colors"
-            >
-              Login
-            </button>
-            <button 
-              onClick={() => onNavigate('demo')}
-              className="btn-primary px-6 py-2.5 rounded-xl transition-all"
-            >
-              Book Demo
-            </button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -139,18 +127,6 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
               ))}
               
               <div className="pt-8 flex flex-col space-y-4">
-                <button 
-                  onClick={() => { onNavigate('demo'); setIsMobileMenuOpen(false); }}
-                  className="w-full h-14 bg-primary text-white font-bold rounded-2xl shadow-lg active:scale-95 transition-transform"
-                >
-                  Get Started for Free
-                </button>
-                <button 
-                  onClick={() => { onNavigate('demo'); setIsMobileMenuOpen(false); }}
-                  className="w-full h-14 bg-slate-100 text-text-heading font-bold rounded-2xl active:scale-95 transition-transform"
-                >
-                  Sign In
-                </button>
               </div>
             </div>
           </motion.div>
