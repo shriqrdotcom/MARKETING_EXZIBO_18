@@ -2,8 +2,41 @@ import { motion } from 'motion/react';
 import { Play, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
 
+function HeroSkeleton() {
+  return (
+    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+          <div className="animate-pulse space-y-6">
+            <div className="h-8 w-48 bg-slate-100 rounded-full" />
+            <div className="space-y-3">
+              <div className="h-14 w-full bg-slate-100 rounded-xl" />
+              <div className="h-14 w-4/5 bg-slate-100 rounded-xl" />
+              <div className="h-14 w-3/5 bg-slate-100 rounded-xl" />
+            </div>
+            <div className="space-y-2">
+              <div className="h-5 w-full bg-slate-50 rounded" />
+              <div className="h-5 w-5/6 bg-slate-50 rounded" />
+            </div>
+            <div className="flex space-x-4">
+              <div className="h-14 w-40 bg-slate-200 rounded-xl" />
+              <div className="h-14 w-40 bg-slate-100 rounded-xl" />
+            </div>
+          </div>
+          <div className="mt-16 lg:mt-0 animate-pulse">
+            <div className="h-96 w-full bg-slate-100 rounded-2xl" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Hero() {
-  const { data } = useCMS();
+  const { data, loading } = useCMS();
+
+  if (loading) return <HeroSkeleton />;
+
   const hero = data.hero;
 
   return (
@@ -20,36 +53,37 @@ export default function Hero() {
           >
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-primary/5 text-primary text-sm font-medium mb-8">
               <span className="flex h-2 w-2 rounded-full bg-primary" />
-              <span>{hero.badge}</span>
+              <span>{hero.badge || 'Version 2.0 is now live'}</span>
               <ChevronRight size={14} />
             </div>
             
             <h1 className="text-3xl sm:text-6xl lg:text-7xl font-display font-bold text-text-heading leading-[1.1] mb-6">
-              {hero.title} <span className="text-primary italic">{hero.titleHighlight}</span> online
+              {hero.title || 'All-in-one platform to grow your'}{' '}
+              <span className="text-primary italic">{hero.titleHighlight || 'restaurant'}</span> online
             </h1>
             
             <p className="text-lg lg:text-xl text-text-secondary mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              {hero.subtitle}
+              {hero.subtitle || 'Create your menu website, manage orders, track performance, and grow your restaurant — all from one dashboard.'}
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
               <button className="btn-primary w-full sm:w-auto h-14 px-10 text-lg shadow-lg shadow-primary/20">
-                {hero.primaryButtonText}
+                {hero.primaryButtonText || 'Explore Platform'}
               </button>
               <button className="btn-secondary w-full sm:w-auto h-14 px-10 text-lg flex items-center justify-center space-x-2">
                 <Play size={18} fill="currentColor" />
-                <span>{hero.secondaryButtonText}</span>
+                <span>{hero.secondaryButtonText || 'View Features'}</span>
               </button>
             </div>
 
             <div className="flex items-center space-x-8 text-sm text-text-secondary">
               <div className="flex items-center space-x-2">
                 <CheckCircle2 size={16} className="text-green-500" />
-                <span>{hero.trustItem1}</span>
+                <span>{hero.trustItem1 || 'No credit card required'}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle2 size={16} className="text-green-500" />
-                <span>{hero.trustItem2}</span>
+                <span>{hero.trustItem2 || '14-day free trial'}</span>
               </div>
             </div>
           </motion.div>

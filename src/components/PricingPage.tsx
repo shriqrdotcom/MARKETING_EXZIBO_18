@@ -11,9 +11,45 @@ import {
 } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
 
+function PricingSkeleton() {
+  return (
+    <div className="bg-[#f5f5f7] min-h-screen pt-32 pb-20 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 animate-pulse">
+        <div className="h-6 w-48 bg-slate-200 rounded-full mx-auto mb-8" />
+        <div className="h-16 w-3/4 bg-slate-200 rounded-xl mx-auto mb-4" />
+        <div className="h-16 w-1/2 bg-slate-200 rounded-xl mx-auto mb-8" />
+        <div className="h-5 w-80 bg-slate-100 rounded mx-auto mb-12" />
+        <div className="h-14 w-64 bg-white rounded-2xl mx-auto" />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="flex-1 bg-white rounded-[2rem] p-8 animate-pulse">
+              <div className="h-6 w-24 bg-slate-200 rounded mb-3" />
+              <div className="h-4 w-full bg-slate-100 rounded mb-8" />
+              <div className="h-10 w-32 bg-slate-200 rounded mb-8" />
+              <div className="space-y-4 mb-10">
+                {Array.from({ length: 4 }).map((_, j) => (
+                  <div key={j} className="flex items-center space-x-3">
+                    <div className="w-5 h-5 rounded-full bg-slate-100 shrink-0" />
+                    <div className="h-4 w-full bg-slate-100 rounded" />
+                  </div>
+                ))}
+              </div>
+              <div className="h-14 w-full bg-slate-100 rounded-2xl" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PricingPage() {
-  const { data } = useCMS();
+  const { data, loading } = useCMS();
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+
+  if (loading) return <PricingSkeleton />;
 
   const getDisplayPrice = (monthlyPrice: number) => {
     return billingCycle === 'yearly' ? monthlyPrice * 10 : monthlyPrice;
@@ -54,54 +90,58 @@ export default function PricingPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="flex flex-col lg:flex-row gap-6 items-stretch flex-wrap">
-          {data.pricing.map((plan) => (
-            <div
-              key={plan.id}
-              className={`relative flex-1 min-w-[220px] bg-white rounded-[2rem] p-8 border-2 transition-all flex flex-col ${plan.highlight ? 'border-[#6C47FF] shadow-2xl scale-105 z-10' : 'border-transparent shadow-sm'}`}
-            >
-              {plan.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-700 px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest flex items-center space-x-1 border border-amber-200">
-                  <Sparkles size={12} />
-                  <span>Most Popular</span>
+        {data.pricing.length === 0 ? (
+          <p className="text-center text-slate-500">No pricing plans available.</p>
+        ) : (
+          <div className="flex flex-col lg:flex-row gap-6 items-stretch flex-wrap">
+            {data.pricing.map((plan) => (
+              <div
+                key={plan.id}
+                className={`relative flex-1 min-w-[220px] bg-white rounded-[2rem] p-8 border-2 transition-all flex flex-col ${plan.highlight ? 'border-[#6C47FF] shadow-2xl scale-105 z-10' : 'border-transparent shadow-sm'}`}
+              >
+                {plan.highlight && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-700 px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest flex items-center space-x-1 border border-amber-200">
+                    <Sparkles size={12} />
+                    <span>Most Popular</span>
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed">{plan.description}</p>
                 </div>
-              )}
 
-              <div className="mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">{plan.name}</h3>
-                <p className="text-sm text-slate-500 font-medium leading-relaxed">{plan.description}</p>
-              </div>
-
-              <div className="mb-8">
-                <div className="flex items-baseline">
-                  <span className="text-3xl sm:text-4xl font-bold text-slate-900">
-                    {plan.price === 0 ? 'Custom' : `₹${getDisplayPrice(plan.price).toLocaleString()}`}
-                  </span>
-                  {plan.price > 0 && (
-                    <span className="text-slate-400 font-medium ml-2">/ {billingCycle}</span>
-                  )}
+                <div className="mb-8">
+                  <div className="flex items-baseline">
+                    <span className="text-3xl sm:text-4xl font-bold text-slate-900">
+                      {plan.price === 0 ? 'Custom' : `₹${getDisplayPrice(plan.price).toLocaleString()}`}
+                    </span>
+                    {plan.price > 0 && (
+                      <span className="text-slate-400 font-medium ml-2">/ {billingCycle}</span>
+                    )}
+                  </div>
                 </div>
+
+                {plan.features.length > 0 && (
+                  <ul className="space-y-4 mb-10 flex-grow">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center space-x-3 text-sm font-semibold text-slate-600">
+                        <div className="w-5 h-5 rounded-full bg-[#6C47FF]/10 flex items-center justify-center text-[#6C47FF] shrink-0">
+                          <Check size={14} strokeWidth={3} />
+                        </div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <button className={`w-full h-14 rounded-2xl font-bold text-lg transition-all active:scale-95 mt-auto ${plan.highlight ? 'bg-[#6C47FF] text-white shadow-lg shadow-[#6C47FF]/25 hover:brightness-110' : 'bg-transparent border-2 border-[#6C47FF] text-[#6C47FF] hover:bg-[#6C47FF]/5'}`}>
+                  {plan.cta}
+                </button>
               </div>
-
-              {plan.features.length > 0 && (
-                <ul className="space-y-4 mb-10 flex-grow">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center space-x-3 text-sm font-semibold text-slate-600">
-                      <div className="w-5 h-5 rounded-full bg-[#6C47FF]/10 flex items-center justify-center text-[#6C47FF] shrink-0">
-                        <Check size={14} strokeWidth={3} />
-                      </div>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <button className={`w-full h-14 rounded-2xl font-bold text-lg transition-all active:scale-95 mt-auto ${plan.highlight ? 'bg-[#6C47FF] text-white shadow-lg shadow-[#6C47FF]/25 hover:brightness-110' : 'bg-transparent border-2 border-[#6C47FF] text-[#6C47FF] hover:bg-[#6C47FF]/5'}`}>
-                {plan.cta}
-              </button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

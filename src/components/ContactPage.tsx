@@ -7,16 +7,49 @@ import {
   Clock, 
   MapPin, 
   ArrowRight, 
-  CheckCircle2, 
   HelpCircle, 
   ExternalLink,
   ShieldCheck,
   Zap,
   Users
 } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
+
+function ContactSkeleton() {
+  return (
+    <div className="bg-white min-h-screen">
+      <section className="pt-32 pb-16 lg:pt-48 lg:pb-24 bg-bg-soft">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-pulse">
+          <div className="h-16 w-3/4 bg-slate-200 rounded-xl mx-auto mb-6" />
+          <div className="h-6 w-1/2 bg-slate-100 rounded mx-auto" />
+        </div>
+      </section>
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 animate-pulse">
+            <div className="space-y-6">
+              <div className="h-8 w-64 bg-slate-200 rounded" />
+              <div className="grid grid-cols-2 gap-6">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="h-40 bg-slate-100 rounded-3xl" />
+                ))}
+              </div>
+            </div>
+            <div className="h-96 bg-slate-100 rounded-[2.5rem]" />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
 
 export default function ContactPage() {
+  const { data, loading } = useCMS();
   const [formType, setFormType] = useState('General Inquiry');
+
+  if (loading) return <ContactSkeleton />;
+
+  const contact = data.contact;
 
   return (
     <div className="bg-white min-h-screen">
@@ -42,7 +75,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-bold text-text-heading leading-tight mb-6">
-              Get in touch with <span className="text-primary italic">EXZIBO</span>
+              Get in touch with <span className="text-primary italic">{data.general.siteName || 'EXZIBO'}</span>
             </h1>
             <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
               We're here to help you grow your restaurant. Reach out to our team anytime for sales, support, or general inquiries.
@@ -66,26 +99,25 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-2xl sm:text-3xl font-display font-bold text-text-heading mb-8">How would you like to connect?</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Direct Contact Cards */}
-                  <a href="mailto:support@exzibo.com" className="group p-6 bg-white rounded-3xl border border-accent hover:border-primary transition-all shadow-sm">
+                  <a href={`mailto:${contact.email}`} className="group p-6 bg-white rounded-3xl border border-accent hover:border-primary transition-all shadow-sm">
                     <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
                       <Mail size={24} />
                     </div>
                     <h4 className="font-bold text-text-heading mb-2">Email support</h4>
                     <p className="text-sm text-text-secondary mb-4">Response within 2 hours</p>
                     <span className="text-primary text-sm font-bold flex items-center group-hover:translate-x-1 transition-transform">
-                      support@exzibo.com <ArrowRight size={14} className="ml-1" />
+                      {contact.email || 'hello@exzibo.com'} <ArrowRight size={14} className="ml-1" />
                     </span>
                   </a>
 
-                  <a href="tel:+1234567890" className="group p-6 bg-white rounded-3xl border border-accent hover:border-primary transition-all shadow-sm">
+                  <a href={`tel:${contact.phone}`} className="group p-6 bg-white rounded-3xl border border-accent hover:border-primary transition-all shadow-sm">
                     <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-all">
                       <Phone size={24} />
                     </div>
                     <h4 className="font-bold text-text-heading mb-2">Phone support</h4>
-                    <p className="text-sm text-text-secondary mb-4">Mon-Fri, 9am - 6pm</p>
+                    <p className="text-sm text-text-secondary mb-4">{contact.hours || 'Mon-Fri, 9am - 6pm'}</p>
                     <span className="text-primary text-sm font-bold flex items-center group-hover:translate-x-1 transition-transform">
-                      +1 (234) 567-890 <ArrowRight size={14} className="ml-1" />
+                      {contact.phone || '+1 (555) 000-0000'} <ArrowRight size={14} className="ml-1" />
                     </span>
                   </a>
 
@@ -122,8 +154,7 @@ export default function ContactPage() {
                   <div>
                     <h5 className="font-bold text-text-heading mb-1">Our HQ</h5>
                     <p className="text-sm text-text-secondary leading-relaxed">
-                      Silicon Valley, CA<br />
-                      Palo Alto, Venture Street 101
+                      {contact.location || 'San Francisco, CA'}
                     </p>
                   </div>
                 </div>
@@ -134,8 +165,7 @@ export default function ContactPage() {
                   <div>
                     <h5 className="font-bold text-text-heading mb-1">Working Hours</h5>
                     <p className="text-sm text-text-secondary leading-relaxed">
-                      Mon – Sat: 9:00 – 19:00<br />
-                      Sunday: Emergency Support Only
+                      {contact.hours || 'Mon–Sat, 9am–7pm'}
                     </p>
                   </div>
                 </div>
