@@ -8,13 +8,9 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import TrustBar from './components/TrustBar';
-import Benefits from './components/Benefits';
 import ProductShowcase from './components/ProductShowcase';
-import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
 import Comparison from './components/Comparison';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
 import BottomCTA from './components/BottomCTA';
 import Footer from './components/Footer';
 import ProductsPage from './components/ProductsPage';
@@ -52,13 +48,9 @@ export default function App() {
           <>
             <Hero />
             <TrustBar />
-            <Benefits />
             <ProductShowcase />
-            <Features />
             <HowItWorks />
             <Comparison />
-            <Testimonials />
-            <FAQ />
             <BottomCTA />
           </>
         );
