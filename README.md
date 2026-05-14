@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# EXZIBO
 
-# Run and deploy your AI Studio app
+An all-in-one platform to grow your restaurant online.
 
-This contains everything you need to run your app locally.
+## Getting Started
 
-View your app in AI Studio: https://ai.studio/apps/91f7ed2f-2e13-44c0-aa08-29b0ad8ed746
+```bash
+npm install
+npm run dev
+```
 
-## Run Locally
+## Routes
 
-**Prerequisites:**  Node.js
+- `/` — Entry screen (choose Admin or Marketing site)
+- `/home` — Marketing website
+- `/admin` — Admin login (username: `admin`, password: `admin123`)
+- `/admin/dashboard` — CMS admin panel
 
+## Tech Stack
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- React 19 + TypeScript
+- Vite 6
+- Tailwind CSS 4
+- React Router v7
+- Motion (Framer Motion)
