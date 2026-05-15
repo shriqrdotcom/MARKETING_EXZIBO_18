@@ -61,6 +61,7 @@ export async function fetchContent(): Promise<CMSData> {
         siteName:    get('general', 'siteName',    DEFAULT_DATA.general.siteName),
         siteTagline: get('general', 'siteTagline', DEFAULT_DATA.general.siteTagline),
         heroImage:   get('general', 'heroImage',   DEFAULT_DATA.general.heroImage),
+        logoImage:   get('general', 'logoImage',   DEFAULT_DATA.general.logoImage),
       },
     };
   } catch (err) {
@@ -93,6 +94,7 @@ export async function upsertContent(cms: CMSData): Promise<void> {
     { section: 'general', key: 'siteName',    value: cms.general.siteName },
     { section: 'general', key: 'siteTagline', value: cms.general.siteTagline },
     { section: 'general', key: 'heroImage',   value: cms.general.heroImage },
+    { section: 'general', key: 'logoImage',   value: cms.general.logoImage },
 
     { section: 'features',     key: 'list', value: JSON.stringify(cms.features) },
     { section: 'testimonials', key: 'list', value: JSON.stringify(cms.testimonials) },

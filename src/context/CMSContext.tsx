@@ -54,6 +54,7 @@ export interface CMSData {
     siteName: string;
     siteTagline: string;
     heroImage: string;
+    logoImage: string;
   };
 }
 
@@ -155,6 +156,7 @@ export const DEFAULT_DATA: CMSData = {
     siteName: 'EXZIBO',
     siteTagline: 'Grow Your Restaurant Online',
     heroImage: '',
+    logoImage: '',
   },
 };
 

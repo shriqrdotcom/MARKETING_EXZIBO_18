@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ChevronRight, Home, LayoutGrid, PlayCircle, Tag, Mail } from 'lucide-react';
+import { useCMS } from '../context/CMSContext';
 
 interface NavbarProps {
   onNavigate: (page: 'home' | 'products' | 'features' | 'pricing' | 'customers' | 'about' | 'demo' | 'contact') => void;
@@ -8,6 +9,8 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
+  const { data } = useCMS();
+  const logoImage = data.general.logoImage;
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -56,12 +59,22 @@ export default function Navbar({ onNavigate, currentPage }: NavbarProps) {
             }}
             className="flex items-center space-x-2 cursor-pointer z-50"
           >
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">E</span>
-            </div>
-            <span className="text-2xl font-display font-bold text-text-heading tracking-tight">
-              EXZIBO
-            </span>
+            {logoImage ? (
+              <img
+                src={logoImage}
+                alt="Site Logo"
+                className="h-9 w-auto object-contain max-w-[160px]"
+              />
+            ) : (
+              <>
+                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">E</span>
+                </div>
+                <span className="text-2xl font-display font-bold text-text-heading tracking-tight">
+                  EXZIBO
+                </span>
+              </>
+            )}
           </a>
 
           {/* Desktop Menu */}

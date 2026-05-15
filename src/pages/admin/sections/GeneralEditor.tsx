@@ -12,9 +12,9 @@ export default function GeneralEditor({ data, onChange }: Props) {
     onChange({ ...data, general: { ...general, [field]: value } });
   };
 
-  const handleImageUpload = (file: File) => {
+  const handleImageUpload = (field: 'heroImage' | 'logoImage', file: File) => {
     const reader = new FileReader();
-    reader.onload = e => update('heroImage', e.target?.result as string);
+    reader.onload = e => update(field, e.target?.result as string);
     reader.readAsDataURL(file);
   };
 
@@ -25,6 +25,7 @@ export default function GeneralEditor({ data, onChange }: Props) {
         <p className="text-sm text-slate-400">Manage global site settings and branding.</p>
       </div>
 
+      {/* Site Identity */}
       <div>
         <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-4 pb-2 border-b border-slate-100">Site Identity</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -51,6 +52,44 @@ export default function GeneralEditor({ data, onChange }: Props) {
         </div>
       </div>
 
+      {/* Website Logo */}
+      <div>
+        <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-1 pb-2 border-b border-slate-100">Website Main Image (Logo)</h3>
+        <p className="text-xs text-slate-400 mb-4">This image will appear as the logo in the website navigation bar.</p>
+        <div className="space-y-4">
+          {general.logoImage ? (
+            <div className="relative inline-flex flex-col items-start">
+              <div className="w-40 h-16 rounded-xl overflow-hidden border-2 border-slate-200 bg-slate-50 flex items-center justify-center">
+                <img src={general.logoImage} alt="Logo" className="max-w-full max-h-full object-contain p-2" />
+              </div>
+              <button
+                onClick={() => update('logoImage', '')}
+                className="mt-2 text-xs font-semibold text-red-500 hover:text-red-700 transition-colors"
+              >
+                Remove logo
+              </button>
+            </div>
+          ) : null}
+
+          <label className="flex items-center justify-center w-full max-w-md h-28 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-black transition-colors group">
+            <div className="text-center">
+              <div className="text-2xl mb-1">🖼️</div>
+              <p className="text-sm font-semibold text-slate-400 group-hover:text-black transition-colors">
+                {general.logoImage ? 'Replace logo image' : 'Upload logo image'}
+              </p>
+              <p className="text-xs text-slate-300 mt-0.5">PNG, JPG, WebP — recommended size 160×64px</p>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={e => e.target.files?.[0] && handleImageUpload('logoImage', e.target.files[0])}
+            />
+          </label>
+        </div>
+      </div>
+
+      {/* Hero Image */}
       <div>
         <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-4 pb-2 border-b border-slate-100">Hero Image</h3>
         <div className="space-y-4">
@@ -73,7 +112,12 @@ export default function GeneralEditor({ data, onChange }: Props) {
               </p>
               <p className="text-xs text-slate-300 mt-0.5">PNG, JPG, WebP</p>
             </div>
-            <input type="file" accept="image/*" className="hidden" onChange={e => e.target.files?.[0] && handleImageUpload(e.target.files[0])} />
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={e => e.target.files?.[0] && handleImageUpload('heroImage', e.target.files[0])}
+            />
           </label>
         </div>
       </div>
