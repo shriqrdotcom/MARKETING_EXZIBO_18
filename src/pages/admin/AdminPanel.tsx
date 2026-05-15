@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Home, Layers, DollarSign, Users, Info,
   MonitorPlay, Phone, Settings, LogOut, Save,
-  CheckCircle, AlertCircle, Menu, X
+  CheckCircle, AlertCircle, Menu, X, Bell
 } from 'lucide-react';
 import { useCMS } from '../../context/CMSContext';
 import { isAuthenticated, logout } from './auth';
@@ -14,9 +14,10 @@ import TestimonialsEditor from './sections/TestimonialsEditor';
 import ContactEditor from './sections/ContactEditor';
 import GeneralEditor from './sections/GeneralEditor';
 
-type Section = 'dashboard' | 'home' | 'features' | 'pricing' | 'customers' | 'contact' | 'general';
+type Section = 'notifications' | 'dashboard' | 'home' | 'features' | 'pricing' | 'customers' | 'contact' | 'general';
 
 const NAV_ITEMS: { id: Section; label: string; icon: any }[] = [
+  { id: 'notifications', label: 'Notifications', icon: Bell },
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'home', label: 'Home / Hero', icon: Home },
   { id: 'features', label: 'Features', icon: Layers },
@@ -75,6 +76,7 @@ export default function AdminPanel() {
 
   const renderSection = () => {
     switch (activeSection) {
+      case 'notifications': return <Notifications />;
       case 'dashboard': return <Dashboard data={localData} onNavigate={setActiveSection} />;
       case 'home': return <HeroEditor data={localData} onChange={handleChange} />;
       case 'features': return <FeaturesEditor data={localData} onChange={handleChange} />;
@@ -192,6 +194,35 @@ export default function AdminPanel() {
   );
 }
 
+function Notifications() {
+  const items = [
+    { title: 'Welcome to EXZIBO Admin', desc: 'Your admin panel is set up and ready to use.', time: 'Just now', unread: true },
+    { title: 'Content saved successfully', desc: 'Your last changes were saved to the database.', time: '2 hours ago', unread: false },
+    { title: 'New pricing plan available', desc: 'Consider adding a custom enterprise tier.', time: '1 day ago', unread: false },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold text-black mb-1">Notifications</h2>
+        <p className="text-slate-400 text-sm">Stay up to date with your latest activity.</p>
+      </div>
+      <div className="space-y-3">
+        {items.map((item, i) => (
+          <div key={i} className={`flex items-start gap-4 bg-white border rounded-xl px-5 py-4 ${item.unread ? 'border-black' : 'border-slate-200'}`}>
+            <div className={`mt-0.5 w-2.5 h-2.5 rounded-full shrink-0 ${item.unread ? 'bg-black' : 'bg-slate-200'}`} />
+            <div className="flex-1 min-w-0">
+              <p className={`text-sm font-semibold ${item.unread ? 'text-black' : 'text-slate-600'}`}>{item.title}</p>
+              <p className="text-xs text-slate-400 mt-0.5">{item.desc}</p>
+            </div>
+            <span className="text-xs text-slate-400 shrink-0">{item.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Dashboard({ data, onNavigate }: { data: any; onNavigate: (s: Section) => void }) {
   const stats = [
     { label: 'Features', count: data.features.length, section: 'features' as Section },
@@ -222,7 +253,7 @@ function Dashboard({ data, onNavigate }: { data: any; onNavigate: (s: Section) =
       <div>
         <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-4">Quick Edit</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {NAV_ITEMS.filter(n => n.id !== 'dashboard').map(item => {
+          {NAV_ITEMS.filter(n => n.id !== 'dashboard' && n.id !== 'notifications').map(item => {
             const Icon = item.icon;
             return (
               <button
