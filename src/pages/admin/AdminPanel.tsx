@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Home, Layers, DollarSign, Users, Info,
-  MonitorPlay, Phone, Settings, LogOut, Eye, Save,
+  MonitorPlay, Phone, Settings, LogOut, Save,
   CheckCircle, AlertCircle, Menu, X
 } from 'lucide-react';
 import { useCMS } from '../../context/CMSContext';
@@ -163,14 +163,6 @@ export default function AdminPanel() {
           </div>
 
           <div className="flex items-center space-x-3">
-            <button
-              onClick={() => window.open('/home', '_blank')}
-              className="hidden sm:flex items-center space-x-2 h-9 px-4 text-sm font-semibold text-black border-2 border-slate-200 rounded-xl hover:bg-slate-50 transition-all"
-            >
-              <Eye size={14} />
-              <span>Preview Site</span>
-            </button>
-
             <button
               onClick={handleSave}
               disabled={saveStatus === 'saving'}
