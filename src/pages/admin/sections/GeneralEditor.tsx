@@ -52,6 +52,20 @@ export default function GeneralEditor({ data, onChange }: Props) {
         </div>
       </div>
 
+      {/* Site Description */}
+      <div>
+        <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-1 pb-2 border-b border-slate-100">Main Description</h3>
+        <p className="text-xs text-slate-400 mb-4">This description appears on the marketing website footer and represents your brand message.</p>
+        <textarea
+          value={general.siteDescription}
+          onChange={e => update('siteDescription', e.target.value)}
+          placeholder="The all-in-one platform to grow your restaurant online..."
+          rows={4}
+          className="w-full px-4 py-3 border-2 border-slate-200 rounded-xl text-sm text-black placeholder:text-slate-300 focus:outline-none focus:border-black transition-colors resize-none leading-relaxed"
+        />
+        <p className="text-xs text-slate-300 mt-1.5">{general.siteDescription.length} characters</p>
+      </div>
+
       {/* Website Logo */}
       <div>
         <h3 className="text-sm font-bold text-black uppercase tracking-wider mb-1 pb-2 border-b border-slate-100">Website Main Image (Logo)</h3>

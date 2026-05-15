@@ -53,6 +53,7 @@ export interface CMSData {
   general: {
     siteName: string;
     siteTagline: string;
+    siteDescription: string;
     heroImage: string;
     logoImage: string;
   };
@@ -155,6 +156,7 @@ export const DEFAULT_DATA: CMSData = {
   general: {
     siteName: 'EXZIBO',
     siteTagline: 'Grow Your Restaurant Online',
+    siteDescription: 'The all-in-one platform to create your menu website, manage orders, track performance, and grow your restaurant — all from one dashboard.',
     heroImage: '',
     logoImage: '',
   },

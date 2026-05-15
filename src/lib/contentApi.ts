@@ -58,10 +58,11 @@ export async function fetchContent(): Promise<CMSData> {
         location: get('footer', 'location', DEFAULT_DATA.footer.location),
       },
       general: {
-        siteName:    get('general', 'siteName',    DEFAULT_DATA.general.siteName),
-        siteTagline: get('general', 'siteTagline', DEFAULT_DATA.general.siteTagline),
-        heroImage:   get('general', 'heroImage',   DEFAULT_DATA.general.heroImage),
-        logoImage:   get('general', 'logoImage',   DEFAULT_DATA.general.logoImage),
+        siteName:        get('general', 'siteName',        DEFAULT_DATA.general.siteName),
+        siteTagline:     get('general', 'siteTagline',     DEFAULT_DATA.general.siteTagline),
+        siteDescription: get('general', 'siteDescription', DEFAULT_DATA.general.siteDescription),
+        heroImage:       get('general', 'heroImage',       DEFAULT_DATA.general.heroImage),
+        logoImage:       get('general', 'logoImage',       DEFAULT_DATA.general.logoImage),
       },
     };
   } catch (err) {
@@ -91,10 +92,11 @@ export async function upsertContent(cms: CMSData): Promise<void> {
     { section: 'footer', key: 'phone',    value: cms.footer.phone },
     { section: 'footer', key: 'location', value: cms.footer.location },
 
-    { section: 'general', key: 'siteName',    value: cms.general.siteName },
-    { section: 'general', key: 'siteTagline', value: cms.general.siteTagline },
-    { section: 'general', key: 'heroImage',   value: cms.general.heroImage },
-    { section: 'general', key: 'logoImage',   value: cms.general.logoImage },
+    { section: 'general', key: 'siteName',        value: cms.general.siteName },
+    { section: 'general', key: 'siteTagline',     value: cms.general.siteTagline },
+    { section: 'general', key: 'siteDescription', value: cms.general.siteDescription },
+    { section: 'general', key: 'heroImage',       value: cms.general.heroImage },
+    { section: 'general', key: 'logoImage',       value: cms.general.logoImage },
 
     { section: 'features',     key: 'list', value: JSON.stringify(cms.features) },
     { section: 'testimonials', key: 'list', value: JSON.stringify(cms.testimonials) },

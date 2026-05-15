@@ -26,7 +26,7 @@ export default function Footer() {
               </span>
             </a>
             <p className="text-text-secondary max-w-xs leading-relaxed">
-              {footer.tagline}
+              {data.general.siteDescription || footer.tagline}
             </p>
             <div className="flex space-x-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
