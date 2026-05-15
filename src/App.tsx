@@ -11,7 +11,6 @@ import TrustBar from './components/TrustBar';
 import ProductShowcase from './components/ProductShowcase';
 import HowItWorks from './components/HowItWorks';
 import Comparison from './components/Comparison';
-import BottomCTA from './components/BottomCTA';
 import Footer from './components/Footer';
 import ProductsPage from './components/ProductsPage';
 import FeaturesPage from './components/FeaturesPage';
@@ -51,7 +50,6 @@ export default function App() {
             <ProductShowcase />
             <HowItWorks />
             <Comparison />
-            <BottomCTA />
           </>
         );
       case 'products':
