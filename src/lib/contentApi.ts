@@ -1,12 +1,9 @@
-import { supabase } from './supabase';
 import { CMSData, DEFAULT_DATA, Feature, PricingPlan, Testimonial } from '../context/CMSContext';
 
 export interface ContentRow {
-  id: string;
   section: string;
   key: string;
   value: string;
-  created_at: string;
 }
 
 function parseJsonSafe<T>(value: string, fallback: T): T {
@@ -18,71 +15,62 @@ function parseJsonSafe<T>(value: string, fallback: T): T {
 }
 
 export async function fetchContent(): Promise<CMSData> {
-  if (!supabase) return DEFAULT_DATA;
+  try {
+    const res = await fetch('/api/content');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data: ContentRow[] = await res.json();
 
-  const { data, error } = await supabase
-    .from('content')
-    .select('section, key, value');
+    if (!data || data.length === 0) return DEFAULT_DATA;
 
-  if (error) {
-    console.error('Supabase fetchContent error:', error.message);
+    const map: Record<string, Record<string, string>> = {};
+    for (const row of data) {
+      if (!map[row.section]) map[row.section] = {};
+      map[row.section][row.key] = row.value;
+    }
+
+    const get = (section: string, key: string, fallback: string): string =>
+      map[section]?.[key] ?? fallback;
+
+    return {
+      hero: {
+        badge:               get('hero', 'badge',               DEFAULT_DATA.hero.badge),
+        title:               get('hero', 'title',               DEFAULT_DATA.hero.title),
+        titleHighlight:      get('hero', 'titleHighlight',      DEFAULT_DATA.hero.titleHighlight),
+        subtitle:            get('hero', 'subtitle',            DEFAULT_DATA.hero.subtitle),
+        primaryButtonText:   get('hero', 'primaryButtonText',   DEFAULT_DATA.hero.primaryButtonText),
+        secondaryButtonText: get('hero', 'secondaryButtonText', DEFAULT_DATA.hero.secondaryButtonText),
+        trustItem1:          get('hero', 'trustItem1',          DEFAULT_DATA.hero.trustItem1),
+        trustItem2:          get('hero', 'trustItem2',          DEFAULT_DATA.hero.trustItem2),
+      },
+      features:     parseJsonSafe<Feature[]>(     get('features',     'list', ''), DEFAULT_DATA.features),
+      testimonials: parseJsonSafe<Testimonial[]>( get('testimonials', 'list', ''), DEFAULT_DATA.testimonials),
+      pricing:      parseJsonSafe<PricingPlan[]>( get('pricing',      'list', ''), DEFAULT_DATA.pricing),
+      contact: {
+        email:    get('contact', 'email',    DEFAULT_DATA.contact.email),
+        phone:    get('contact', 'phone',    DEFAULT_DATA.contact.phone),
+        location: get('contact', 'location', DEFAULT_DATA.contact.location),
+        hours:    get('contact', 'hours',    DEFAULT_DATA.contact.hours),
+      },
+      footer: {
+        tagline:  get('footer', 'tagline',  DEFAULT_DATA.footer.tagline),
+        email:    get('footer', 'email',    DEFAULT_DATA.footer.email),
+        phone:    get('footer', 'phone',    DEFAULT_DATA.footer.phone),
+        location: get('footer', 'location', DEFAULT_DATA.footer.location),
+      },
+      general: {
+        siteName:    get('general', 'siteName',    DEFAULT_DATA.general.siteName),
+        siteTagline: get('general', 'siteTagline', DEFAULT_DATA.general.siteTagline),
+        heroImage:   get('general', 'heroImage',   DEFAULT_DATA.general.heroImage),
+      },
+    };
+  } catch (err) {
+    console.error('fetchContent error:', err);
     return DEFAULT_DATA;
   }
-
-  if (!data || data.length === 0) {
-    return DEFAULT_DATA;
-  }
-
-  const map: Record<string, Record<string, string>> = {};
-  for (const row of data) {
-    if (!map[row.section]) map[row.section] = {};
-    map[row.section][row.key] = row.value;
-  }
-
-  const get = (section: string, key: string, fallback: string): string =>
-    map[section]?.[key] ?? fallback;
-
-  return {
-    hero: {
-      badge: get('hero', 'badge', DEFAULT_DATA.hero.badge),
-      title: get('hero', 'title', DEFAULT_DATA.hero.title),
-      titleHighlight: get('hero', 'titleHighlight', DEFAULT_DATA.hero.titleHighlight),
-      subtitle: get('hero', 'subtitle', DEFAULT_DATA.hero.subtitle),
-      primaryButtonText: get('hero', 'primaryButtonText', DEFAULT_DATA.hero.primaryButtonText),
-      secondaryButtonText: get('hero', 'secondaryButtonText', DEFAULT_DATA.hero.secondaryButtonText),
-      trustItem1: get('hero', 'trustItem1', DEFAULT_DATA.hero.trustItem1),
-      trustItem2: get('hero', 'trustItem2', DEFAULT_DATA.hero.trustItem2),
-    },
-    features: parseJsonSafe<Feature[]>(get('features', 'list', ''), DEFAULT_DATA.features),
-    testimonials: parseJsonSafe<Testimonial[]>(get('testimonials', 'list', ''), DEFAULT_DATA.testimonials),
-    pricing: parseJsonSafe<PricingPlan[]>(get('pricing', 'list', ''), DEFAULT_DATA.pricing),
-    contact: {
-      email: get('contact', 'email', DEFAULT_DATA.contact.email),
-      phone: get('contact', 'phone', DEFAULT_DATA.contact.phone),
-      location: get('contact', 'location', DEFAULT_DATA.contact.location),
-      hours: get('contact', 'hours', DEFAULT_DATA.contact.hours),
-    },
-    footer: {
-      tagline: get('footer', 'tagline', DEFAULT_DATA.footer.tagline),
-      email: get('footer', 'email', DEFAULT_DATA.footer.email),
-      phone: get('footer', 'phone', DEFAULT_DATA.footer.phone),
-      location: get('footer', 'location', DEFAULT_DATA.footer.location),
-    },
-    general: {
-      siteName: get('general', 'siteName', DEFAULT_DATA.general.siteName),
-      siteTagline: get('general', 'siteTagline', DEFAULT_DATA.general.siteTagline),
-      heroImage: get('general', 'heroImage', DEFAULT_DATA.general.heroImage),
-    },
-  };
 }
 
 export async function upsertContent(cms: CMSData): Promise<void> {
-  if (!supabase) {
-    console.warn('Supabase not configured — changes saved locally only.');
-    return;
-  }
-
-  const rows: { section: string; key: string; value: string }[] = [
+  const rows: ContentRow[] = [
     { section: 'hero', key: 'badge',               value: cms.hero.badge },
     { section: 'hero', key: 'title',               value: cms.hero.title },
     { section: 'hero', key: 'titleHighlight',      value: cms.hero.titleHighlight },
@@ -111,40 +99,22 @@ export async function upsertContent(cms: CMSData): Promise<void> {
     { section: 'pricing',      key: 'list', value: JSON.stringify(cms.pricing) },
   ];
 
-  const { error } = await supabase
-    .from('content')
-    .upsert(rows, { onConflict: 'section,key' });
+  const res = await fetch('/api/content', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(rows),
+  });
 
-  if (error) {
-    console.error('Supabase upsertContent error:', error.message);
-    throw new Error(error.message);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error ?? `HTTP ${res.status}`);
   }
 }
 
-export async function fetchMediaUrl(bucket: string, path: string): Promise<string | null> {
-  if (!supabase) return null;
-  const { data } = supabase.storage.from(bucket).getPublicUrl(path);
-  return data?.publicUrl ?? null;
+export async function fetchMediaUrl(_bucket: string, _path: string): Promise<string | null> {
+  return null;
 }
 
-export async function listMediaFiles(bucket: string, folder?: string): Promise<string[]> {
-  if (!supabase) return [];
-
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .list(folder ?? '', { limit: 100, offset: 0 });
-
-  if (error || !data) {
-    console.error('Supabase listMediaFiles error:', error?.message);
-    return [];
-  }
-
-  return data
-    .filter((item) => item.name && !item.name.startsWith('.'))
-    .map((item) => {
-      const { data: urlData } = supabase!.storage
-        .from(bucket)
-        .getPublicUrl(folder ? `${folder}/${item.name}` : item.name);
-      return urlData.publicUrl;
-    });
+export async function listMediaFiles(_bucket: string, _folder?: string): Promise<string[]> {
+  return [];
 }
