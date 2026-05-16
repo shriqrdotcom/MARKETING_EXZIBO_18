@@ -35,11 +35,13 @@ export default function AdminPanel() {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const isAdminSubdomain = window.location.hostname === 'main.exzibo.online';
+
   useEffect(() => {
     if (!isAuthenticated()) {
-      navigate('/admin');
+      navigate(isAdminSubdomain ? '/' : '/admin');
     }
-  }, [navigate]);
+  }, [navigate, isAdminSubdomain]);
 
   useEffect(() => {
     setLocalData(data);
@@ -275,7 +277,7 @@ function Dashboard({ data, onNavigate }: { data: any; onNavigate: (s: Section) =
         <p className="font-bold mb-1">How it works</p>
         <p className="text-sm text-slate-400 leading-relaxed">
           Edit any section using the sidebar, then click <strong className="text-white">Save</strong> in the top bar. Changes are saved to Supabase and reflected instantly on the live site.
-          Click <strong className="text-white">Preview Site</strong> to see your changes at <code className="text-slate-300">/home</code>.
+          Click <strong className="text-white">Preview Site</strong> to see your changes at <code className="text-slate-300">exzibo.online</code>.
         </p>
       </div>
     </div>

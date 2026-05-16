@@ -79,12 +79,14 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        <button
-          onClick={() => navigate('/')}
-          className="w-full mt-4 text-center text-sm text-slate-400 hover:text-black transition-colors"
-        >
-          ← Back to home
-        </button>
+        {window.location.hostname !== 'main.exzibo.online' && (
+          <button
+            onClick={() => navigate('/')}
+            className="w-full mt-4 text-center text-sm text-slate-400 hover:text-black transition-colors"
+          >
+            ← Back to home
+          </button>
+        )}
       </div>
     </div>
   );
