@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setAuthenticated, isAuthenticated } from './auth';
 
-const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'admin123';
-
 const isAdminSubdomain = window.location.hostname === 'main.exzibo.online';
 const DASHBOARD_PATH = isAdminSubdomain ? '/dashboard' : '/admin/dashboard';
+const ADMIN_USER = isAdminSubdomain ? 'admin@exzibo' : 'admin';
+const ADMIN_PASS = isAdminSubdomain ? 'Exzibo@123' : 'admin123';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
