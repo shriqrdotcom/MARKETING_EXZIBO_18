@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { setAuthenticated } from './auth';
+import { setAuthenticated, isAuthenticated } from './auth';
 
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'admin123';
+
+const isAdminSubdomain = window.location.hostname === 'main.exzibo.online';
+const DASHBOARD_PATH = isAdminSubdomain ? '/dashboard' : '/admin/dashboard';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -12,6 +15,13 @@ export default function AdminLogin() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (isAuthenticated()) {
+      console.log('[Auth] Already authenticated — redirecting to dashboard:', DASHBOARD_PATH);
+      navigate(DASHBOARD_PATH, { replace: true });
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -19,12 +29,14 @@ export default function AdminLogin() {
     await new Promise(r => setTimeout(r, 400));
 
     if (username === ADMIN_USER && password === ADMIN_PASS) {
+      console.log('[Auth] Login success — setting session and redirecting to:', DASHBOARD_PATH);
       setAuthenticated();
-      navigate('/admin/dashboard');
+      navigate(DASHBOARD_PATH, { replace: true });
     } else {
+      console.log('[Auth] Login failed — invalid credentials');
       setError('Invalid username or password.');
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -79,7 +91,7 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        {window.location.hostname !== 'main.exzibo.online' && (
+        {!isAdminSubdomain && (
           <button
             onClick={() => navigate('/')}
             className="w-full mt-4 text-center text-sm text-slate-400 hover:text-black transition-colors"
